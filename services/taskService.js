@@ -33,3 +33,8 @@ function markDone(id){
     writeTasks(tasks);
     return task
 }
+function listTask(filter){
+    tasks = readTask()
+    if(!filter) return tasks;
+    return tasks.filter(t => t.status === filter);
+}
