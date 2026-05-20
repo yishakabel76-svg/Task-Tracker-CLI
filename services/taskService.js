@@ -1,5 +1,5 @@
 const {readTasks, writeTasks } = require("../storage/db")
-function AddTask(title) {
+function addTask(title) {
     const tasks = readTasks();
     const newTask ={
         id: tasks.length + 1,
@@ -33,8 +33,24 @@ function markDone(id){
     writeTasks(tasks);
     return task
 }
+function markInProgress(id){
+    const tasks = readTasks()
+    const task = tasks.find(t => t.id === id);
+    if(!tasks)return null;
+    task.status = "In Progress";
+    writeTasks(tasks);
+    return task
+}
 function listTask(filter){
-    tasks = readTask()
+    tasks = readTasks()
     if(!filter) return tasks;
     return tasks.filter(t => t.status === filter);
 }
+module.exports = {
+    addTask,
+    updateTask,
+    deleteTask,
+    markInProgress,
+    markDone,
+    listTask
+};
