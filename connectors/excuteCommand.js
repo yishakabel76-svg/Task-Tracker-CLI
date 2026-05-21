@@ -11,17 +11,18 @@ const commandMap = {
     update : updateTask,
     delete : deleteTask,
     "mark-in-progress" : markInProgress,
-    "markDone" : markDone,
+    "mark-done": markDone,
     list : listTask
 };
-function executeCommand(parsedCommand, args = []){
-    if(!prasedCommand || !prasedCommand.valid){
+function executeCommand(parsedCommand,arg = []){
+    if(!parsedCommand || !parsedCommand.valid){
         return{error : "Command not found"}
     };
     const action = commandMap[parsedCommand.command];
         if(!action)return {error : "Command not found"};
-    return action(...args);
+    const result = action(...(arg||[]));
+    return result
 }
-module.export = executeCommand;
+module.exports = executeCommand;
 
 
